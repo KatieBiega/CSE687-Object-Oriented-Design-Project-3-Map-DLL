@@ -1,4 +1,4 @@
-﻿/*
+/*
 * CSE687 Project 1
 *
 * The map class will contain a public method map(), that accepts a key and value. 
@@ -23,20 +23,25 @@
 #include "MapDLL.h"
 
 using std::stringstream;
+using std::replace;
 
 void Map::map(string& line)
 {
 	//Initializing temporary string for buffering words
 	string temp = "";
 
-	//Remove all punctuation and special characters excpet spaces from input line
+	//Remove all punctuation and special characters except spaces from the input line
 	int index;
-	while ((index = line.find_first_of(".,--:&!?\\;*+[]<>()/n'")) != string::npos)
+	while ((index = line.find_first_of(".,-&!?\\;*+[]<>()'")) != string::npos)
 	{
-
 		line.erase(index, 1);
 		//cout << "Erase line in mapping.\n";
 	}
+
+	//Replace additonal special charcters with space for delimiting
+	replace(line.begin(), line.end(), '\n', ' ');
+	replace(line.begin(), line.end(), ':', ' ');
+	replace(line.begin(), line.end(), '-', ' ');
 
 	//Set all alphabetic characters in input line to lower case 
 	transform(line.begin(), line.end(), line.begin(),
@@ -51,6 +56,7 @@ void Map::map(string& line)
 		words.push_back(temp);
 		//cout << "Pushing to temp string in map...\n";
 	}
+	
 }
 
 string Map::vector_export()
