@@ -30,14 +30,6 @@ void Map::map(string& line)
 	//Initializing temporary string for buffering words
 	string temp = "";
 
-	//Remove all punctuation and special characters except spaces from the input line
-	int index;
-	while ((index = line.find_first_of(".,:&!?\\;*+[]<>()'")) != string::npos)
-	{
-		line.erase(index, 1);
-		//cout << "Erase line in mapping.\n";
-	}
-
 	//Replace additonal special charcters with space for delimiting
 	//replace(line.begin(), line.end(), '\n', ' ');
 	//replace(line.begin(), line.end(), '-', ' ');
@@ -53,6 +45,14 @@ void Map::map(string& line)
 	{
 		line.replace(index3, 2, " ");
 		index3 += 1;
+	}
+
+	//Remove all punctuation and special characters except spaces from the input line
+	int index;
+	while ((index = line.find_first_of(".,:-&!?\\;*+[]<>()'")) != string::npos)
+	{
+		line.erase(index, 1);
+		//cout << "Erase line in mapping.\n";
 	}
 
 	//Set all alphabetic characters in input line to lower case 
