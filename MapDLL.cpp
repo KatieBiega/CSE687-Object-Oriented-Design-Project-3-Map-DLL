@@ -32,16 +32,21 @@ void Map::map(string& line)
 
 	//Remove all punctuation and special characters except spaces from the input line
 	int index;
-	while ((index = line.find_first_of(".,-&!?\\;*+[]<>()'")) != string::npos)
+	while ((index = line.find_first_of(".,-:&!?;*+[]<>()'")) != string::npos)
 	{
 		line.erase(index, 1);
 		//cout << "Erase line in mapping.\n";
 	}
 
 	//Replace additonal special charcters with space for delimiting
-	replace(line.begin(), line.end(), '\n', ' ');
-	replace(line.begin(), line.end(), ':', ' ');
-	replace(line.begin(), line.end(), '-', ' ');
+	//line.replace(line.begin(), line.end(), '\n', ' ');
+	//line.replace(line.begin(), line.end(), '-', ' ');
+	int index2 = 0;
+	while ((index2 = line.find("\n", 0)) != string::npos)
+	{
+		line.replace(index2, 1, " ");
+		index2 += 1;
+	}
 
 	//Set all alphabetic characters in input line to lower case 
 	transform(line.begin(), line.end(), line.begin(),
